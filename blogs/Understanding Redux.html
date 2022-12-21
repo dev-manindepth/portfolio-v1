@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Understaing Redux</title>
+      <link rel="stylesheet" href="../style.css" />
+   </head>
+   <body>
+         <nav class="navigation container">
+            <div class="nav-brand"><a href="../index.html">manish</a> </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item"><a class="nav-link" href="../index.html">home</a></li>
+        <li class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="../blog.html">blogs</a></li>
+      </ul>
+    </nav>
+      <article class="article-post">
+        <h1 class="article-title">Understaing Redux</h1>
+        <p class="article-phase">✍️ beta phase</p>
+        <div class="article-prerequisite">Prerequisite : Familarity With React and Vanilla JavaScript</div>
+            <img class="article-image" src="https://redux.js.org/img/redux-logo-landscape.png" alt="">
+         <h2 class="article-subtitle">What is Redux</h2 class="article-subtitle">
+         <p>
+            Redux is state management library for Javascript app. It is a library
+            for managing and updating the application state using events called
+            actions. It's a centralized store that's shared across the entire
+            application and ensures that the state gets updated in a predictable
+            fashion
+         </p>
+         <h3>The three main principles of Redux</h3>
+         <ol>
+            <li>Single Source of Truth</li>
+            <li>State is Immutable</li>
+            <li>Changes are made with pure functions only</li>
+         </ol>
+         <p>Let's understand all the core concept in details</p>
+         <p><span>Single Source of Truth</span> means the global state of our application is stored in   an  object  within a single store.</p>
+         <h2 class="article-subtitle">Redux Analogy </h2 class="article-subtitle">
+         <h3>Let's take a computer shop example . Let's understand diffenent entity of a shop .</h3>
+         <p>  
+            A shop is place where all the items that needs to sold are stored. Particularly a computer shop has computers of different brands . <br> Similarly In redux we have <span>store</span>  which stores the state from different component.
+         </p>
+         <p>
+            Suppose I have intention to buy a dell computer . <br>
+            Redux provides us <span>action</span>  to express our intention .This intention of buying computer can be expressed via an action in redux  
+         </p>
+         <p>
+            Now We need to express our intention to shokepper by some medium for ex - We can say to shopkepper that we want to buy a laptop , or we can fill template  form and send it to shopkeeper (the way we do in railway station to buy reservation ticket) . <br>
+            Redux provides us a similar  way to communicate to shopkepper . It provides a <span>dispatch function</span>  which carry our action
+         </p>
+         <p>
+            The shop has a shopkeeper who is responsible for all selling new computer ,taking return computer if malfunctioned and restock the shop with new branded laptop . Now our shopkepper has recieved a message that someone wants to buy a computer.Then the shopkepper will reduce the count of computer by 1 and make recipet and hand over computer to customer <br>
+            Similarly in redux we have Reducer function, which is responsible for all state transition( brain of redux) . For example -> when someone want to buy a computer ,the shopkepper reduces the quantity of particurlar laptop by 1 and make reciept and hand over to customer . Similary reducer function will decrement the count of computer of particular brand by 1 
+         </p>
+         <h3>Reiterate concept</h3>
+         <table  class="comparison-table">
+           <thead>
+             <th>Computer Shop </th>
+             <th>Redux </th>
+           </thead>
+           <tbody>
+             <tr>
+
+               <td>Shop</td>
+               <td>Redux Global Store</td>
+              </tr>
+              <tr>
+                <td>Shopkepper</td>
+                <td>Reducer</td>
+              </tr>
+              <tr>
+                <td>Customer Intention to buy </td>
+                <td>Action or Action Creator </td>
+              </tr>
+              <tr>
+                <td>Tell the shopkepper that you want to buy </td>
+                <td>Dispatch() method helps you to send action to store</td>
+              </tr>
+           </tbody>
+         </table>
+         <p></p>
+         <h2 class="article-subtitle">How does Redux Work</h2 class="article-subtitle">
+         <h3>The working of Redux depends upon 3 core concepts</h3>
+         <ol>
+            <li>Action</li>
+            <li>Dispatch</li>
+            <li>Reducer</li>
+         </ol>
+         <p>
+         <h4>Action</h4>
+         <span>Action</span> is a plan javascript object which describes what
+         appropriate action need to be taken upon particular event occurance .<br />
+         For example : When we click a button , clicking a button is event , but
+         what we want to do on clicking a button is <span>action</span> sometimes
+         we want to increment a counter ,sometimes we want to fetch list of users
+         etc . <br >
+         <p>
+            Let's reiterate what we have learnt . Action is a plain javascript
+            object which describe the event . The action object must have a named
+            key called <span>type</span> . We can also provide more information
+            about the event using another name key <span>payload</span> . It is
+            optional to define but very helpul at the same . for example -> On
+            clicking a button you want to fetch list of users , but how many users
+            Infinty ? .No probably no we don't want that much user data we probably
+            want only 20 users . The extra information here 20 user can be passed as
+            payload
+         </p>
+         </p>
+         <code>
+             <pre>
+
+        const action ={ 
+          type:"increment"
+         } 
+        const action ={
+           type:"increment",
+            payload:2 
+        }
+        const action ={ 
+          type:"fetchUsers",
+           payload:20
+       }
+
+                </pre>
+         </code>
+         <h4>Action Creator </h4>
+         <p>Redux Provides a better way to work with action i.e <span>Action Creator</span> .They are simple javascript function which does nothing but just return our action object . That means Action Creators are function which returns action object . Now from now insted of writting plain action object we will create a action creator function which in turn return our action object </p>
+         <code>
+         <code>
+             <pre>
+        const buyTicket = function (){
+            return {
+                type:"buyTicket"
+            }
+
+        const increment = function (){
+            return {
+                type:"increment",
+                payload:3 
+            }
+        }
+        }
+             </pre>
+         </code>
+         <h4>Dispatch</h4>
+         <p>
+            Now we have already defined a action , Now we need some way to send this action to store . Redux provides us a <span>dispatch() function</span> which carry our action .For ex - You want to buy ticket from railway station .You have your action prepared <code> const action ={ type="buyTicket" } </code> . and to send this action to ticket counter we need some way .For this we fill a form that describes our action and payload and give it to ticket counter  
+         </p>
+         <p>Redux store provides us dipatch() method . So first import store and then call dispatch() method on it </p>
+         <code>
+             <pre>
+        import store from './store.js' 
+                 
+        store.dispatch({type:"buyTicket"});
+                </pre>
+         </code>
+         <h4>Reducers</h4>
+         <p>
+             Reducers are pure function which are responsible for all the state transition in store . In simple word reducers perform all the logic of our state . It is responsibe for making state transition.
+             For ex -> Up until now We have our action ready and also we have dispatched that action through dispatch function . now we need some who can listen to our action . Reducer is that function which listend to any action dispatched through dispatch() function . In real world example A shopkepper can be reducer because It listens to all the action dispatched by us and also he is responsibe for selling returning or restocking item in store . A ticket master can be reducer because again he listens our action and perform some work like making reservation seat for us and reduce the count of seat by 1 etc. 
+            </p>
+             <code>
+                <pre>
+      const reducer = (state,action)=>{
+          switch(action.type){
+              case "buyTicket":
+                return {
+                  ...state,
+       state.numOfTicket : 
+       state.numOfTicket - action.payload
+                  }
+                  break;
+              case "returnTicket":
+                  return {
+                    ...state,
+        state.numOfTicket:
+        state.numOfTicket + action.payload 
+                  }
+                  break;
+              default:
+                  return state;    
+                
+            }
+        }
+                </pre>
+                </code>
+                <p>reducer fuction recieve two argument <span> state</span> (i.e previous state) of application  <span>action </span>(it recieves the actions that we dispatch ) <br>
+                We defined a switch case inside reducer fuction it will check each until a matching case found . If any case matches then particular state transition occur . One thing to not here we donot try to mutate the original store state . Store is immutable . Hence we first copy all the object properties and only update the property that we want  <br>
+                But if the action sent by user doesn't match in switch case then we return the default previous state , This situation is similar to the situation where you want to buy something from  a shop but the  shop doesnot have that item .then the shopkepper 
+                </p>
+                <h2 class="article-subtitle">WorkFlow of Redux </h2 class="article-subtitle">
+                <img src="https://d3n0h9tb65y8q.cloudfront.net/public_assets/assets/000/001/696/original/How_to_structure_top_level_directories_in_Redux.png?1637254915" alt="" class="article-image">
+
+            </article>
+                <footer class="container footer">
+      <h2 class="section-title">Connect with me</h2 class="article-subtitle">
+      <ul class="social-links">
+        <li>
+          <a
+            href="https://www.linkedin.com/in/manish-kumar-a7913818a/"
+            target="_blank"
+          >
+            <img
+              class="social-icon"
+              src="../social icons/linkedin-alt.svg"
+              alt=""
+            />
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/dev-manindepth" target="_blank">
+            <img
+              class="social-icon"
+              src="../social icons/github-alt.svg"
+              alt=""
+            />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.instagram.com/manishpatedhawala/"
+            target="_blank"
+          >
+            <img
+              class="social-icon"
+              src="../social icons/instagram.svg"
+              alt=""
+            />
+          </a>
+        </li>
+        <li>
+          <img
+            class="social-icon"
+            src="../social icons/twitter-alt.svg"
+            alt=""
+          />
+          <a href="https://twitter.com/Manishk73087268" target="_blank"></a>
+        </li>
+      </ul>
+    </footer>
+        </body>
+</html>
